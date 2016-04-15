@@ -1,0 +1,44 @@
+/* line 3, sass/style.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  text-decoration: none;
+  list-style: none;
+}
+
+/* line 11, sass/style.scss */
+.gallery-am {
+  width: 1024px;
+  margin: 20px auto 0;
+}
+/* line 15, sass/style.scss */
+.gallery-am ul {
+  font-size: 0;
+}
+/* line 18, sass/style.scss */
+.gallery-am ul li {
+  display: inline-block;
+  width: 125px;
+  height: 125px;
+  margin: 0 10px 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+/* line 26, sass/style.scss */
+.gallery-am ul li img {
+  -moz-transition: -moz-transform 0.4s;
+  -o-transition: -o-transform 0.4s;
+  -webkit-transition: -webkit-transform 0.4s;
+  transition: transform 0.4s;
+}
+/* line 29, sass/style.scss */
+.gallery-am ul li:hover img {
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -webkit-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+}
