@@ -1,5 +1,6 @@
 require 'compass/import-once/activate'
 
+relative_assets = true;
 
 http_path = "/"
 css_dir = "/assets/stylesheets"

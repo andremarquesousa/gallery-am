@@ -1,3 +1,5 @@
 $(document).ready(function() {
-	$('.open-lightbox-am').lightboxAm();
+	$('.gallery-am').galleryAm({
+        pagination: 12
+    });
 });
