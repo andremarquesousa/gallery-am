@@ -111,7 +111,14 @@
             $('ul li', $nav).eq(0).addClass('active');
 
             function slidePagination(index) {
-
+                $wrapper
+                    .css({
+                        '-webkit-transform' : 'translateX(' + (- width * index) + 'px)',
+                        '-moz-transform'    : 'translateX(' + (- width * index) + 'px)',
+                        '-ms-transform'     : 'translateX(' + (- width * index) + 'px)',
+                        '-o-transform'      : 'translateX(' + (- width * index) + 'px)',
+                        'transform'         : 'translateX(' + (- width * index) + 'px)'
+                    });
             }
 
             $('ul li button', $nav).on('click', function() {
@@ -121,31 +128,28 @@
                     .siblings()
                     .removeClass('active');
 
-                $wrapper
-                    .css({
-                        '-webkit-transform' : 'translateX(' + (- width * $(this).parent().index()) + 'px)',
-                        '-moz-transform'    : 'translateX(' + (- width * $(this).parent().index()) + 'px)',
-                        '-ms-transform'     : 'translateX(' + (- width * $(this).parent().index()) + 'px)',
-                        '-o-transform'      : 'translateX(' + (- width * $(this).parent().index()) + 'px)',
-                        'transform'         : 'translateX(' + (- width * $(this).parent().index()) + 'px)'
-                    });
+                slidePagination($(this).parent().index());
             });
 
             $(document).on('click', '.nav-am', function() {
+                var newActive;
+
                 if ($(this).hasClass('pagination-prev-am')) {
                     if ($('li.active', $nav).prev().length) {
-                        $('li.active', $nav)
-                            .prev()
-                            .addClass('active')
-                            .siblings()
-                            .removeClass('active');
-                        console.log('tem');
+                        newActive = $('li.active', $nav).prev();
                     }
-                } /*else {
-                    if (index < listItens.length -1) {
-                        index += 1;
+                } else {
+                    if ($('li.active', $nav).next().length) {
+                        newActive = $('li.active', $nav).next();
                     }
-                }*/
+                }
+                if (newActive) {
+                    newActive
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active');
+                }
+                slidePagination($('li.active', $nav).index());
             });
         };
 
