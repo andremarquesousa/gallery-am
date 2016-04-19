@@ -126,26 +126,36 @@
                     .siblings()
                     .removeClass('active');
 
-                animationSlide(parent, $(this).parent().index(), width);
+                $('.slide-wrapper-am', parent)
+                    .children()
+                    .eq($(this).parent().index())
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active');
+
+
+                animationSlide($('.slide-wrapper-am', parent), $(this).parent().index(), width);
             });
         }
 
         var navSlide = function(parent, width) {
             $(document).off().on('click', '.nav-am', function() {
-                var newActive,
-                    itemActive = $('.slide-wrapper-am >.active', parent);
+                var newActive = false,
+                    itemActive = $('.slide-wrapper-am', parent).find('>.active');
 
                 if ($(this).hasClass('prev-am')) {
                     if (itemActive.prev().length) {
+                        console.log('prevEXIS');
                         newActive = itemActive.prev();
                     }
                 } else {
                     if (itemActive.next().length) {
+                        console.log('nextEXIS');
                         newActive = itemActive.next();
                     }
                 }
 
-                if (newActive) {
+                if (newActive != false) {
                     newActive
                         .addClass('active')
                         .siblings()
