@@ -103,15 +103,19 @@
             $wrapper
                 .appendTo($list)
                 .find('.slide-wrapper-am')
-                .outerWidth(width * total);
+                .outerWidth(width * total)
+                .find('>ul')
+                .eq(0)
+                .addClass('active');
 
-            $nav.appendTo($list);
+            $nav.appendTo($wrapper);
             $('ul', $nav).before($prev);
             $('ul', $nav).after($next);
 
             $('ul li', $nav).eq(0).addClass('active');
 
-            //navSlide($wrapper, width)
+            navSlide($wrapper, width);
+            paginationSlide($wrapper, width);
         };
 
         var paginationSlide = function(parent, width) {
@@ -129,27 +133,34 @@
         var navSlide = function(parent, width) {
             $(document).off().on('click', '.nav-am', function() {
                 var newActive,
-                    itemActive = $('li.active', parent);
+                    itemActive = $('.slide-wrapper-am >.active', parent);
 
                 if ($(this).hasClass('prev-am')) {
                     if (itemActive.prev().length) {
-                        console.log('prev');
                         newActive = itemActive.prev();
                     }
                 } else {
                     if (itemActive.next().length) {
-                        console.log('next');
                         newActive = itemActive.next();
                     }
                 }
 
-                if (newActive.length) {
+                if (newActive) {
                     newActive
                         .addClass('active')
                         .siblings()
                         .removeClass('active');
+
+                    animationSlide($('.slide-wrapper-am', parent), newActive.index(), width);
+
+                    if ($('.nav-pag-am', parent).length) {
+                        $('.nav-pag-am li')
+                            .eq(newActive.index())
+                            .addClass('active')
+                            .siblings()
+                            .removeClass('active');
+                    }
                 }
-                animationSlide($('.slide-wrapper-am', parent), newActive.index(), width);
             });
         }
 

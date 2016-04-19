@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('.gallery-am').galleryAm({
-        items: 12
+        items: 18,
+        lightbox: true
     });
 });
