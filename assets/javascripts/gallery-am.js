@@ -7,7 +7,7 @@
             indexItem = 0,
             options = {
                 lightbox: false,
-                pagination: false,
+                items: false,
                 fade: 400
             }
 
@@ -23,12 +23,12 @@
             })
 
             if (options.lightbox) {
-                carousel();
+                carousel.init();
             } else {
-                pagination(options.pagination);
+                showImage.init();
             }
 
-            showImage.init();
+            pagination(options.items)
             getIndex();
         };
 
@@ -36,11 +36,15 @@
             item.on('click', function() {
                 var $element = $(this);
 
-                item.removeClass('active');
-                $element.addClass('active');
-
                 indexItem = parseInt($element.data('id'));
-                showImage.change(indexItem);
+
+                if (options.lightbox) {
+                    carousel.open(indexItem);
+                } else {
+                    showImage.change(indexItem);
+                    item.removeClass('active');
+                    $element.addClass('active');
+                };
                 event.preventDefault();
             });
         };
@@ -74,15 +78,11 @@
             }
         };
 
-        var carousel = function(index) {
-
-        };
-
         var pagination = function(number) {
-            var $wrapper = $('<div class="wrapper-am"></div>'),
+            var $wrapper = $('<div class="wrapper-am"><div class="slide-wrapper-am"></div></div>'),
                 $nav = $('<nav class="nav-pag-am"><ul></ul></nav>'),
-                $prev = $('<button class="pagination-prev-am nav-am" type="button"></button').text($list.data('prev')),
-                $next = $('<button class="pagination-next-am nav-am" type="button"></button').text($list.data('next')),
+                $prev = $('<button class="prev-am nav-am" type="button"></button').text($list.data('prev')),
+                $next = $('<button class="next-am nav-am" type="button"></button').text($list.data('next')),
                 ul = item.parent(),
                 slice = number,
                 total = Math.ceil(item.length / number),
@@ -96,12 +96,13 @@
                 itemPag.appendTo($('ul', $nav));
                 newLis.appendTo(newUl);
                 newUl
-                    .appendTo($wrapper)
+                    .appendTo($('.slide-wrapper-am', $wrapper))
                     .outerWidth(width);
             }
             ul.remove();
             $wrapper
                 .appendTo($list)
+                .find('.slide-wrapper-am')
                 .outerWidth(width * total);
 
             $nav.appendTo($list);
@@ -110,8 +111,91 @@
 
             $('ul li', $nav).eq(0).addClass('active');
 
-            function slidePagination(index) {
-                $wrapper
+            //navSlide($wrapper, width)
+        };
+
+        var paginationSlide = function(parent, width) {
+            $('.nav-pag-am ul li button', parent).on('click', function() {
+                $(this)
+                    .parent()
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active');
+
+                animationSlide(parent, $(this).parent().index(), width);
+            });
+        }
+
+        var navSlide = function(parent, width) {
+            $(document).off().on('click', '.nav-am', function() {
+                var newActive,
+                    itemActive = $('li.active', parent);
+
+                if ($(this).hasClass('prev-am')) {
+                    if (itemActive.prev().length) {
+                        console.log('prev');
+                        newActive = itemActive.prev();
+                    }
+                } else {
+                    if (itemActive.next().length) {
+                        console.log('next');
+                        newActive = itemActive.next();
+                    }
+                }
+
+                if (newActive.length) {
+                    newActive
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active');
+                }
+                animationSlide($('.slide-wrapper-am', parent), newActive.index(), width);
+            });
+        }
+
+        var animationSlide = function(parent, index, width) {
+            parent
+                .css({
+                    '-webkit-transform' : 'translateX(' + (- width * index) + 'px)',
+                    '-moz-transform'    : 'translateX(' + (- width * index) + 'px)',
+                    '-ms-transform'     : 'translateX(' + (- width * index) + 'px)',
+                    '-o-transform'      : 'translateX(' + (- width * index) + 'px)',
+                    'transform'         : 'translateX(' + (- width * index) + 'px)'
+                });
+        }
+
+        var carousel = {
+            carousel: false,
+            init: function() {
+                var $prev = $('<button class="prev-am nav-am" type="button"></button').text($list.data('prev')),
+                    $next = $('<button class="next-am nav-am" type="button"></button').text($list.data('next')),
+                    $close = $('<button class="close-carousel-am" type="button"></button>').text($this.data('close'));
+
+                this.carousel = $('<div class="carousel-am"><div class="wrapper-am"><ul class="slide-wrapper-am"></ul></div></div>');
+
+                for (var i = 0; i < item.length; i++) {
+                    var li = $('<li><img src="' + $(item[i]).data('large') + '" alt="' + $(item[i]).find('img').attr('alt') + '" /></li>');
+                    li.appendTo($('ul', this.carousel));
+                }
+
+                $('.wrapper-am', this.carousel).before($prev);
+                $('.wrapper-am', this.carousel).after($next);
+                $close.appendTo(this.carousel);
+            },
+            open: function(index) {
+                var width;
+
+                if (!$('body .carousel-am').length) {
+                    this.carousel.appendTo('body');
+                    width = $('.wrapper-am', this.carousel).outerWidth();
+
+                    $('.wrapper-am ul', this.carousel).outerWidth(width * item.length);
+                    $('.wrapper-am ul li', this.carousel).outerWidth(width);
+
+                    this.close();
+                }
+                
+                $('.carousel-am .slide-wrapper-am')
                     .css({
                         '-webkit-transform' : 'translateX(' + (- width * index) + 'px)',
                         '-moz-transform'    : 'translateX(' + (- width * index) + 'px)',
@@ -119,38 +203,22 @@
                         '-o-transform'      : 'translateX(' + (- width * index) + 'px)',
                         'transform'         : 'translateX(' + (- width * index) + 'px)'
                     });
-            }
 
-            $('ul li button', $nav).on('click', function() {
-                $(this)
-                    .parent()
+                navSlide($('.carousel-am'), width);
+
+
+                $('.carousel-am')
                     .addClass('active')
-                    .siblings()
-                    .removeClass('active');
-
-                slidePagination($(this).parent().index());
-            });
-
-            $(document).on('click', '.nav-am', function() {
-                var newActive;
-
-                if ($(this).hasClass('pagination-prev-am')) {
-                    if ($('li.active', $nav).prev().length) {
-                        newActive = $('li.active', $nav).prev();
-                    }
-                } else {
-                    if ($('li.active', $nav).next().length) {
-                        newActive = $('li.active', $nav).next();
-                    }
-                }
-                if (newActive) {
-                    newActive
-                        .addClass('active')
-                        .siblings()
-                        .removeClass('active');
-                }
-                slidePagination($('li.active', $nav).index());
-            });
+                    .find('li')
+                    .eq(index)
+                    .addClass('active');
+            },
+            close: function() {
+                $('.carousel-am').on('click', '.close-carousel-am', function() {
+                    $('.carousel-am').removeClass('active');
+                    event.preventDefault();
+                });
+            }
         };
 
         init();

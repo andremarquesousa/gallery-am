@@ -1,5 +1,5 @@
 $(document).ready(function() {
 	$('.gallery-am').galleryAm({
-        pagination: 12
+        items: 12
     });
 });

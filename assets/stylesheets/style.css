@@ -12,21 +12,45 @@
 }
 
 /* line 12, sass/style.scss */
+button {
+  cursor: pointer;
+}
+
+/* line 15, sass/style.scss */
+.wrapper-am {
+  overflow: hidden;
+}
+/* line 18, sass/style.scss */
+.wrapper-am .slide-wrapper-am {
+  -moz-transition: -moz-transform 0.6s;
+  -o-transition: -o-transform 0.6s;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  height: 100%;
+  overflow: hidden;
+}
+/* line 23, sass/style.scss */
+.wrapper-am .slide-wrapper-am > ul
+, .wrapper-am .slide-wrapper-am > li {
+  float: left;
+  height: 100%;
+}
+
+/* line 30, sass/style.scss */
 .gallery-am {
   width: 875px;
   margin: 20px auto 0;
 }
-/* line 16, sass/style.scss */
+/* line 34, sass/style.scss */
 .gallery-am .show-image-am {
   width: 800px;
-  height: 500px;
+  height: 530px;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
 }
-/* line 23, sass/style.scss */
+/* line 41, sass/style.scss */
 .gallery-am .show-image-am.loading:before
-, .gallery-am .show-image-am.loading:after
 , .gallery-am .show-image-am img {
   display: block;
   position: absolute;
@@ -36,92 +60,71 @@
   right: 0;
   margin: auto;
 }
-/* line 34, sass/style.scss */
-.gallery-am .show-image-am.loading:before
-, .gallery-am .show-image-am.loading:after {
-  content: '';
-}
-/* line 38, sass/style.scss */
+/* line 51, sass/style.scss */
 .gallery-am .show-image-am.loading:before {
+  content: '';
   background-image: url('../images/loading.gif?1460750670');
   width: 62px;
   height: 62px;
   z-index: 3;
 }
-/* line 44, sass/style.scss */
-.gallery-am .show-image-am.loading:after {
-  background: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-/* line 50, sass/style.scss */
+/* line 58, sass/style.scss */
 .gallery-am .show-image-am img {
   -moz-transition: opacity 0.4s;
   -o-transition: opacity 0.4s;
   -webkit-transition: opacity 0.4s;
   transition: opacity 0.4s;
   z-index: 1;
+  max-width: 100%;
+  max-height: 100%;
 }
-/* line 54, sass/style.scss */
+/* line 64, sass/style.scss */
 .gallery-am .show-image-am.hide img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 58, sass/style.scss */
+/* line 68, sass/style.scss */
 .gallery-am .list-am {
   margin-top: 40px;
   overflow: hidden;
 }
-/* line 62, sass/style.scss */
-.gallery-am .list-am .wrapper-am {
-  -moz-transition: -moz-transform 0.6s;
-  -o-transition: -o-transform 0.6s;
-  -webkit-transition: -webkit-transform 0.6s;
-  transition: transform 0.6s;
-  overflow: hidden;
+/* line 72, sass/style.scss */
+.gallery-am .list-am .slide-wrapper-am {
+  padding: 10px 0;
 }
-/* line 66, sass/style.scss */
-.gallery-am .list-am .wrapper-am ul {
-  float: left;
-}
-/* line 71, sass/style.scss */
+/* line 76, sass/style.scss */
 .gallery-am .list-am .nav-pag-am {
   font-size: 0;
   text-align: center;
 }
-/* line 75, sass/style.scss */
+/* line 80, sass/style.scss */
 .gallery-am .list-am .nav-pag-am ul
 , .gallery-am .list-am .nav-pag-am > button {
   display: inline-block;
   vertical-align: top;
 }
-/* line 80, sass/style.scss */
-.gallery-am .list-am .nav-pag-am button {
-  cursor: pointer;
-}
-/* line 83, sass/style.scss */
-.gallery-am .list-am .nav-pag-am button.pagination-prev-am
-, .gallery-am .list-am .nav-pag-am button.pagination-next-am {
+/* line 86, sass/style.scss */
+.gallery-am .list-am .nav-pag-am .nav-am.prev-am
+, .gallery-am .list-am .nav-pag-am .nav-am.next-am {
   font-size: 0;
   width: 0;
   height: 0;
   border-top: 14px solid transparent;
   border-bottom: 14px solid transparent;
 }
-/* line 91, sass/style.scss */
-.gallery-am .list-am .nav-pag-am button.pagination-prev-am {
+/* line 94, sass/style.scss */
+.gallery-am .list-am .nav-pag-am .nav-am.prev-am {
   border-right: 14px solid #666;
 }
-/* line 94, sass/style.scss */
-.gallery-am .list-am .nav-pag-am button.pagination-next-am {
+/* line 97, sass/style.scss */
+.gallery-am .list-am .nav-pag-am .nav-am.next-am {
   border-left: 14px solid #666;
 }
-/* line 98, sass/style.scss */
+/* line 101, sass/style.scss */
 .gallery-am .list-am .nav-pag-am ul {
   margin: 0 10px 10px;
 }
-/* line 101, sass/style.scss */
+/* line 104, sass/style.scss */
 .gallery-am .list-am .nav-pag-am ul li {
   -moz-transition: opacity 0.6s;
   -o-transition: opacity 0.6s;
@@ -130,28 +133,35 @@
   display: inline-block;
   margin-left: 5px;
 }
-/* line 106, sass/style.scss */
+/* line 109, sass/style.scss */
 .gallery-am .list-am .nav-pag-am ul li:first-child {
   margin-left: 0;
 }
-/* line 109, sass/style.scss */
+/* line 112, sass/style.scss */
 .gallery-am .list-am .nav-pag-am ul li.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
 }
-/* line 112, sass/style.scss */
+/* line 115, sass/style.scss */
 .gallery-am .list-am .nav-pag-am ul li button {
   color: #666;
   font-size: 16px;
   padding: 5px;
 }
-/* line 121, sass/style.scss */
+/* line 124, sass/style.scss */
 .gallery-am .list-am ul {
   font-size: 0;
   text-align: center;
 }
-/* line 125, sass/style.scss */
+/* line 128, sass/style.scss */
 .gallery-am .list-am ul .item-am {
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-transition: -moz-transform 0.4s, opacity 0.4s;
+  -o-transition: -o-transform 0.4s, opacity 0.4s;
+  -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+  transition: transform 0.4s, opacity 0.4s;
   background: #000;
   display: inline-block;
   width: 125px;
@@ -160,22 +170,187 @@
   overflow: hidden;
   cursor: pointer;
 }
-/* line 134, sass/style.scss */
+/* line 139, sass/style.scss */
+.gallery-am .list-am ul .item-am:hover {
+  -moz-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+/* line 142, sass/style.scss */
 .gallery-am .list-am ul .item-am img {
-  -moz-transition: -moz-transform 0.4s, opacity 0.6s;
-  -o-transition: -o-transform 0.4s, opacity 0.6s;
-  -webkit-transition: -webkit-transform 0.4s, opacity 0.6s;
-  transition: transform 0.4s, opacity 0.6s;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-transition: opacity 0.6s;
+  -o-transition: opacity 0.6s;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
 }
-/* line 137, sass/style.scss */
-.gallery-am .list-am ul .item-am:hover img {
-  -moz-transform: scale(1.1, 1.1);
-  -ms-transform: scale(1.1, 1.1);
-  -webkit-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
-/* line 140, sass/style.scss */
+/* line 146, sass/style.scss */
 .gallery-am .list-am ul .item-am.active img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4;
+}
+/* line 151, sass/style.scss */
+.gallery-am .list-am ul:hover .item-am {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+}
+/* line 154, sass/style.scss */
+.gallery-am .list-am ul:hover .item-am:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+
+/* line 164, sass/style.scss */
+.carousel-am {
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 172, sass/style.scss */
+.carousel-am.active {
+  visibility: visible;
+}
+/* line 175, sass/style.scss */
+.carousel-am.active .wrapper-am {
+  -moz-transform: rotate3d(0, 0, 0, 0);
+  -webkit-transform: rotate3d(0, 0, 0, 0);
+  transform: rotate3d(0, 0, 0, 0);
+}
+/* line 178, sass/style.scss */
+.carousel-am.active .wrapper-am .slide-wrapper-am {
+  display: block;
+}
+/* line 183, sass/style.scss */
+.carousel-am:before
+, .carousel-am .wrapper-am {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+/* line 189, sass/style.scss */
+.carousel-am:before {
+  background: rgba(0, 0, 0, 0.6);
+  content: '';
+  width: 100%;
+  height: 100%;
+}
+/* line 195, sass/style.scss */
+.carousel-am .nav-am {
+  -moz-box-shadow: 0, 0, 3px, rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0, 0, 3px, rgba(0, 0, 0, 0.6);
+  box-shadow: 0, 0, 3px, rgba(0, 0, 0, 0.6);
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  margin: auto 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+}
+/* line 207, sass/style.scss */
+.carousel-am .nav-am.prev-am {
+  border-right: 25px solid #fff;
+  left: 20px;
+}
+/* line 211, sass/style.scss */
+.carousel-am .nav-am.next-am {
+  border-left: 25px solid #fff;
+  right: 20px;
+}
+/* line 216, sass/style.scss */
+.carousel-am .wrapper-am {
+  -moz-transition: -moz-transform 0.6s;
+  -o-transition: -o-transform 0.6s;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  -moz-transform: rotate3d(1, 1, 0, 90deg);
+  -webkit-transform: rotate3d(1, 1, 0, 90deg);
+  transform: rotate3d(1, 1, 0, 90deg);
+  right: 0;
+  bottom: 0;
+  width: 1024px;
+  height: 768px;
+  margin: auto;
+}
+/* line 225, sass/style.scss */
+.carousel-am .wrapper-am .slide-wrapper-am {
+  display: none;
+}
+/* line 228, sass/style.scss */
+.carousel-am .wrapper-am .slide-wrapper-am li {
+  position: relative;
+}
+/* line 231, sass/style.scss */
+.carousel-am .wrapper-am .slide-wrapper-am li img {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+/* line 245, sass/style.scss */
+.carousel-am .close-carousel-am {
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-transition: border 0.4s;
+  -o-transition: border 0.4s;
+  -webkit-transition: border 0.4s;
+  transition: border 0.4s;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: solid 2px transparent;
+}
+/* line 255, sass/style.scss */
+.carousel-am .close-carousel-am:before
+, .carousel-am .close-carousel-am:after {
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  content: '';
+  background: #fff;
+  width: 25px;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+/* line 270, sass/style.scss */
+.carousel-am .close-carousel-am:before {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+/* line 273, sass/style.scss */
+.carousel-am .close-carousel-am:after {
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* line 276, sass/style.scss */
+.carousel-am .close-carousel-am:hover {
+  border-color: #fff;
 }
