@@ -29,11 +29,13 @@ button {
     }
 }
 .gallery-am {
-    width: 875px;
+    width: 100%;
+    max-width: 875px;
     margin: 20px auto 0;
 
     .show-image-am {
-        width: 800px;
+        width: 100%;
+        max-width: 800px;
         height: 530px;
         margin: 0 auto;
         position: relative;
@@ -192,12 +194,14 @@ button {
         content: '';
         width: 100%;
         height: 100%;
+        z-index: 1;
     }
     .nav-am {
         font-size: 0;
         position: absolute;
         top: 0;
         bottom: 0;
+        z-index: 3;
         width: 100px;
         height: 100px;
         margin: auto 0;
@@ -236,7 +240,9 @@ button {
         @include rotate3d(1, 1, 0, 90deg);
         right: 0;
         bottom: 0;
-        width: 1024px;
+        z-index: 2;
+        width: 80%;
+        max-width: 1024px;
         height: 768px;
         margin: auto;
 

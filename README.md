@@ -66,12 +66,14 @@ CSS EXAMPLE
 }
 
 .gallery-am {
-  width: 875px;
+  width: 100%;
+  max-width: 875px;
   margin: 20px auto 0;
 }
 
 .gallery-am .show-image-am {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: 530px;
   margin: 0 auto;
   position: relative;
