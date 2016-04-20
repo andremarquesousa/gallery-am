@@ -28,7 +28,7 @@
                 showImage.init();
             }
 
-            pagination(options.items)
+            pagination.init(options.items);
             getIndex();
         };
 
@@ -78,44 +78,52 @@
             }
         };
 
-        var pagination = function(number) {
-            var $wrapper = $('<div class="wrapper-am"><div class="slide-wrapper-am"></div></div>'),
-                $nav = $('<nav class="nav-pag-am"><ul></ul></nav>'),
-                $prev = $('<button class="prev-am nav-am" type="button"></button').text($list.data('prev')),
-                $next = $('<button class="next-am nav-am" type="button"></button').text($list.data('next')),
-                ul = item.parent(),
-                slice = number,
-                total = Math.ceil(item.length / number),
-                width = $list.outerWidth();
+        var pagination = {
+            init: function(number) {
+                var $wrapper = $('<div class="wrapper-am"><div class="slide-wrapper-am"></div></div>'),
+                    $nav = $('<nav class="nav-pag-am"><ul></ul></nav>'),
+                    $prev = $('<button class="prev-am nav-am" type="button"></button').text($list.data('prev')),
+                    $next = $('<button class="next-am nav-am" type="button"></button').text($list.data('next')),
+                    ul = item.parent(),
+                    slice = number,
+                    total = Math.ceil(item.length / number),
+                    width = $list.outerWidth();
 
-            for(i = 0; i < total; i++) {
-                var itemPag = $('<li><button type="button">' + (i + 1) + '</button></li>')
-                    newUl = ul.clone().empty(),
-                    newLis = item.slice(i * slice, (i * slice) + slice);
+                for(i = 0; i < total; i++) {
+                    var itemPag = $('<li><button type="button">' + (i + 1) + '</button></li>')
+                        newUl = ul.clone().empty(),
+                        newLis = item.slice(i * slice, (i * slice) + slice);
 
-                itemPag.appendTo($('ul', $nav));
-                newLis.appendTo(newUl);
-                newUl
-                    .appendTo($('.slide-wrapper-am', $wrapper))
-                    .outerWidth(width);
+                    itemPag.appendTo($('ul', $nav));
+                    newLis.appendTo(newUl);
+                    newUl
+                        .appendTo($('.slide-wrapper-am', $wrapper))
+                        .outerWidth(width);
+                }
+                ul.remove();
+                $wrapper
+                    .appendTo($list)
+                    .find('.slide-wrapper-am')
+                    .outerWidth(width * total)
+                    .find('>ul')
+                    .eq(0)
+                    .addClass('active');
+
+                $nav.appendTo($wrapper);
+                $('ul', $nav).before($prev);
+                $('ul', $nav).after($next);
+
+                $('ul li', $nav).eq(0).addClass('active');
+                navSlide($wrapper, width);
+                paginationSlide($wrapper, width);
+            },
+            execute: function() {
+                var $wrapper = $('div.wrapper-am'),
+                    width = $list.outerWidth();
+
+                navSlide($wrapper, width);
+                paginationSlide($wrapper, width);
             }
-            ul.remove();
-            $wrapper
-                .appendTo($list)
-                .find('.slide-wrapper-am')
-                .outerWidth(width * total)
-                .find('>ul')
-                .eq(0)
-                .addClass('active');
-
-            $nav.appendTo($wrapper);
-            $('ul', $nav).before($prev);
-            $('ul', $nav).after($next);
-
-            $('ul li', $nav).eq(0).addClass('active');
-
-            navSlide($wrapper, width);
-            paginationSlide($wrapper, width);
         };
 
         var paginationSlide = function(parent, width) {
@@ -142,6 +150,8 @@
             $(document).off().on('click', '.nav-am', function() {
                 var newActive = false,
                     itemActive = $('.slide-wrapper-am', parent).find('>.active');
+
+                console.log(itemActive);
 
                 if ($(this).hasClass('prev-am')) {
                     if (itemActive.prev().length) {
@@ -237,6 +247,7 @@
             close: function() {
                 $('.carousel-am').on('click', '.close-carousel-am', function() {
                     $('.carousel-am').removeClass('active');
+                    pagination.execute();
                     event.preventDefault();
                 });
             }
