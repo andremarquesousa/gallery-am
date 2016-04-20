@@ -191,9 +191,17 @@
             $(document).off().on('click', '.nav-am', function() {
                 getElemment($(this));
             });
-            $(document).keyup(function(e){
-                getElemment(false, e.keyCode);
-            })
+
+            if (options.navKey) {
+                $(document).keyup(function(e){
+                    if (e.keyCode == 27) {
+                        $('.carousel-am').removeClass('active');
+                        pagination.execute();
+                    } else if (e.keyCode == 37 || e.keyCode == 39){
+                        getElemment(false, e.keyCode);
+                    }
+                });
+            }
         }
 
         var animationSlide = function(parent, width) {
