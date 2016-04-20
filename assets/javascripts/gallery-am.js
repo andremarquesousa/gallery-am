@@ -38,8 +38,6 @@
 
                 indexItem = parseInt($element.data('id'));
 
-                console.log(indexItem)
-
                 if (options.lightbox) {
                     carousel.open();
                 } else {
@@ -153,8 +151,6 @@
 
         var navSlide = function(parent, width) {
             $(document).off().on('click', '.nav-am', function() {
-                console.log(itemActive, newActive, indexItem);
-
                 var newActive,
                     itemActive = $('.slide-wrapper-am', parent).find('>.active');
 
@@ -187,7 +183,6 @@
                                 .removeClass('active');
                         }
                     }
-                    console.log(itemActive.get(0), newActive.get(0), indexItem);
                 }
             });
         }
