@@ -339,9 +339,10 @@ button {
   right: 20px;
   width: 40px;
   height: 40px;
+  z-index: 3;
   border: solid 2px transparent;
 }
-/* line 279, sass/style.scss */
+/* line 280, sass/style.scss */
 .carousel-am .close-carousel-am:before
 , .carousel-am .close-carousel-am:after {
   -moz-backface-visibility: hidden;
@@ -361,21 +362,21 @@ button {
   bottom: 0;
   margin: auto;
 }
-/* line 294, sass/style.scss */
+/* line 295, sass/style.scss */
 .carousel-am .close-carousel-am:before {
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 297, sass/style.scss */
+/* line 298, sass/style.scss */
 .carousel-am .close-carousel-am:after {
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* line 300, sass/style.scss */
+/* line 301, sass/style.scss */
 .carousel-am .close-carousel-am:hover {
   border-color: #fff;
 }
