@@ -8,7 +8,8 @@
             options = {
                 lightbox: false,
                 items: false,
-                fade: 400
+                fade: 400,
+                navKey: false
             }
 
         if (newOptions) {
@@ -150,16 +151,18 @@
         }
 
         var navSlide = function(parent, width) {
-            $(document).off().on('click', '.nav-am', function() {
-                var newActive,
+            function getElemment(elem, keyCode) {
+                var $element = elem || false,
+                    keyCode = keyCode || false,
+                    newActive,
                     itemActive = $('.slide-wrapper-am', parent).find('>.active');
 
-                if ($(this).hasClass('prev-am')) {
+                if (($element != false && $element.hasClass('prev-am')) || (keyCode != false && keyCode == 37)) {
                     if (itemActive.prev().length) {
                         newActive = itemActive.prev();
                         execute();
                     }
-                } else {
+                } else if(($element != false && $element.hasClass('next-am')) || (keyCode != false && keyCode == 39)) {
                     if (itemActive.next().length) {
                         newActive = itemActive.next();
                         execute();
@@ -184,7 +187,13 @@
                         }
                     }
                 }
+            }
+            $(document).off().on('click', '.nav-am', function() {
+                getElemment($(this));
             });
+            $(document).keyup(function(e){
+                getElemment(false, e.keyCode);
+            })
         }
 
         var animationSlide = function(parent, width) {
