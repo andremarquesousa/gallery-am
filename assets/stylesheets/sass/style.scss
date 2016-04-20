@@ -8,6 +8,7 @@
     border: none;
     text-decoration: none;
     list-style: none;
+    outline: none;
 }
 button {
     cursor: pointer;
@@ -193,24 +194,41 @@ button {
         height: 100%;
     }
     .nav-am {
-        @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.6));
         font-size: 0;
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 0; 
-        height: 0;
+        width: 100px;
+        height: 100px;
         margin: auto 0;
-        border-top: 25px solid transparent;
-        border-bottom: 25px solid transparent;
 
+        &:before {
+            @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.6));
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            margin: auto;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+        }
         &.prev-am {
-            border-right: 25px solid #fff;
             left: 20px;
+
+            &:before {
+                border-right: 25px solid #fff;
+            }
         }
         &.next-am {
-            border-left: 25px solid #fff;
             right: 20px;
+
+            &:before {
+                border-left: 25px solid #fff;
+            }
         }
     }
     .wrapper-am {
