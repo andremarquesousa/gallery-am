@@ -131,16 +131,20 @@ $('.gallery-am').galleryAm();
 OPTIONS
 
 items: 
-    - type number
-    - number of items
+    - type number;
+    - number of items;
 
 lightbox:
-    - type boolean
-    - for open images on gallery lightbox
+    - type boolean;
+    - for open images on gallery lightbox;
 
 fade
-    - type number
+    - type number;
     - animation time for change image;
+    
+navKey
+    - type boolean;
+    - for navigation with keyboard;
 
 
 
