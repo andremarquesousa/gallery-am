@@ -1,4 +1,4 @@
-# lightbox-am
+# gallery-am
 Studying Jquery
 
 
@@ -126,7 +126,7 @@ CSS EXAMPLE
 
 USAGE
 
-$('.open-lightbox-am').lightboxAm();
+$('.gallery-am').galleryAm();
 
 OPTIONS
 
